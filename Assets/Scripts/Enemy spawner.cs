@@ -8,7 +8,6 @@ public class Enemyspawner : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        
         gameManager.enemySpawners.Add(this);
     }
 }

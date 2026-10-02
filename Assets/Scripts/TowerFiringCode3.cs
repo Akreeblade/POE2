@@ -1,14 +1,11 @@
-using System;
 using UnityEngine;
 
-public class TowerfiringCode : TowerClass
+public class TowerFiringCode3 : TowerClass
 {
-    
-    
     //[SerializeField] GameObject bullet;
-    
 
-    
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     
 
@@ -35,7 +32,6 @@ public class TowerfiringCode : TowerClass
         {
             Destroy(gameObject);
         }
-    }
 
-    
+    }
 }

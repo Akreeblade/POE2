@@ -13,11 +13,10 @@ GameObject:
   - component: {fileID: 7825387987020229176}
   - component: {fileID: 8759548142992782062}
   - component: {fileID: 7411816763290829850}
-  - component: {fileID: -7245675403486016536}
-  - component: {fileID: 7203616843932386833}
+  - component: {fileID: 3988355804836097939}
   m_Layer: 0
   m_Name: Tower
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130,7 +129,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainTower
   gameManager: {fileID: 0}
---- !u!114 &-7245675403486016536
+  maxHealth: 100
+  currentHealth: 100
+  onHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onTowerDestroyed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3988355804836097939
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,33 +146,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1957766487862493457}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57abf60286e65394d8e331b5ee1b55ca, type: 3}
+  m_Script: {fileID: 11500000, guid: e34f0ccee00d9f043bf577fb410cd1d5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TowerHealth
---- !u!54 &7203616843932386833
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1957766487862493457}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 14
-  m_CollisionDetection: 0
+  m_EditorClassIdentifier: Assembly-CSharp::Maintowerfiring
+  checkRadius: 10
+  bullet: {fileID: 8825560854005931840, guid: 7a531246f073ec944acde040df3f96d7, type: 3}
+  fireRate: 2

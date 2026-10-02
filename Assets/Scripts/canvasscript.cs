@@ -5,46 +5,53 @@ using UnityEngine.UI;
 
 public class canvasscript : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI Money;
+    TextMeshProUGUI Money;
     GameObject manager;
     Moneyholdscript moneyholdscript;
-    Button towerbutton;
+    [SerializeField]Button towerbutton1;
+    [SerializeField] Button towerbutton2;
+    [SerializeField] Button towerbutton3;
+
     int money;
     string moneystring;
-    [SerializeField] TextMeshProUGUI towercost;
-
     Tower_Placement towerplacement;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-
     {   manager = GameObject.Find("GameManager");
         towerplacement = GameObject.Find("GameManager").GetComponent<Tower_Placement>();
-        towerbutton = GetComponentInChildren<Button>();
-        towerbutton.onClick.AddListener(TowerActivation);
+       
+        towerbutton1.onClick.AddListener(TowerActivation1);
+        towerbutton2.onClick.AddListener(TowerActivation2);
+        towerbutton3.onClick.AddListener(TowerActivation3);
         moneyholdscript = manager.GetComponent<Moneyholdscript>();
         Debug.Log(moneyholdscript);
-        
-        
+        Money = GetComponentInChildren<TextMeshProUGUI>();
 
         Debug.Log("Manager: " + manager);
         Debug.Log("Money Script: " + moneyholdscript);
         Debug.Log("Money Text: " + Money);
-        Debug.Log("Tower Button: " + towerbutton);
+        Debug.Log("Tower Button: " + towerbutton1);
     }
 
     // Update is called once per frame
     void Update()
     {
-        towercost.text = "Tower Cost: " + towerplacement.getTowercost() + "$";
         money = moneyholdscript.GetMoney();
         moneystring = "Money: " + money + "$";
         Money.text = moneystring;
     }
 
-     public void TowerActivation()
+     public void TowerActivation1()
     {
-        towerplacement.SetPlacingTowerMode(true);
-        
+        towerplacement.SetPlacingTower1Mode(true);
+    }
+    public void TowerActivation2()
+    {
+        towerplacement.SetPlacingTower2Mode(true);
+    }
+    public void TowerActivation3()
+    {
+        towerplacement.SetPlacingTower3Mode(true);
     }
 }

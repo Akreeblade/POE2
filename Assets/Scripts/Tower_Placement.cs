@@ -3,13 +3,20 @@ using UnityEngine;
 
 public class Tower_Placement : MonoBehaviour
 {
-    [SerializeField] private GameObject towerPrefab; 
+    [SerializeField] private GameObject towerPrefab1;
+    [SerializeField] private GameObject towerPrefab2;
+    [SerializeField] private GameObject towerPrefab3;
+
     private Transform towerParent;
     [SerializeField] private float checkRadius = 5f;
     public string targetTag = "Placement";
     private bool enough_money= false;
     private int tower_cost = 50;
-    private bool placing_tower_mode = false;
+    private int tower_cost2 = 150;
+    private int tower_cost3 = 250;
+    private bool placing_tower1_mode = false;
+    private bool placing_tower2_mode = false;
+    private bool placing_tower3_mode = false;
     private Moneyholdscript moneyHoldScript;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,25 +24,19 @@ public class Tower_Placement : MonoBehaviour
         moneyHoldScript = GetComponent<Moneyholdscript>();
     }
 
-    public int  getTowercost()
-    {
-        return tower_cost;
-    }
    
     // Update is called once per frame
     void Update()
     {
-        if (placing_tower_mode)
+        if (placing_tower1_mode)
         {
-           
-             if (Input.GetMouseButtonDown(0))
-             {
-                
+            if (Input.GetMouseButtonDown(0))
+            {
                 if (CanPlaceTower())
                 {
                     if (moneyHoldScript.purchasetower(tower_cost))
                     {
-                        PlaceTower();
+                        PlaceTower1();
                     }
                     else
                     {
@@ -46,19 +47,79 @@ public class Tower_Placement : MonoBehaviour
                 {
                     Debug.Log("cant place tower here");
                 }
-                 
-             }
+            }
         }
-        
+        if (placing_tower2_mode)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (CanPlaceTower())
+                {
+                    if (moneyHoldScript.purchasetower(tower_cost2))
+                    {
+                        // FIXED: Calls PlaceTower2 now
+                        PlaceTower2();
+                    }
+                    else
+                    {
+                        Debug.Log("Not enough money to place tower!");
+                    }
+                }
+                else
+                {
+                    Debug.Log("cant place tower here");
+                }
+            }
+        }
+        if (placing_tower3_mode)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (CanPlaceTower())
+                {
+                    if (moneyHoldScript.purchasetower(tower_cost3))
+                    {
+                        // FIXED: Calls PlaceTower3 now
+                        PlaceTower3();
+                    }
+                    else
+                    {
+                        Debug.Log("Not enough money to place tower!");
+                    }
+                }
+                else
+                {
+                    Debug.Log("cant place tower here");
+                }
+            }
+        }
+
     }
 
     public int GetTowerCost()
     {
         return tower_cost;
     }
-    public void SetPlacingTowerMode(bool isPlacing)
+    public void SetPlacingTower1Mode(bool isPlacing)
     {
-        placing_tower_mode = isPlacing;
+        placing_tower1_mode = isPlacing;
+        placing_tower2_mode = !isPlacing;
+        placing_tower3_mode = !isPlacing;
+    
+
+}
+    public void SetPlacingTower2Mode(bool isPlacing)
+    {
+        placing_tower1_mode = !isPlacing;
+        placing_tower2_mode =isPlacing;
+        placing_tower3_mode = !isPlacing;
+
+    }
+    public void SetPlacingTower3Mode(bool isPlacing)
+    {
+        placing_tower1_mode = !isPlacing;
+        placing_tower2_mode = !isPlacing;
+        placing_tower3_mode = isPlacing;
     }
 
     public void SetEnoughMoney(bool hasEnough)
@@ -99,13 +160,39 @@ public class Tower_Placement : MonoBehaviour
                  
     }
 
-    public void PlaceTower()
+    public void PlaceTower1()
     {
-        if (towerPrefab != null)
+        if (towerPrefab1 != null)
         {
-            GameObject tower = Instantiate(towerPrefab, transform.position, Quaternion.identity);//spawns the tower then 
+            GameObject tower = Instantiate(towerPrefab1, transform.position, Quaternion.identity);//spawns the tower then 
             tower.transform.SetPositionAndRotation(towerParent.position, transform.rotation);// makes it transfrom the towerparent
-            placing_tower_mode=false;
+            placing_tower1_mode=false;
+        }
+        else
+        {
+            Debug.LogError("Tower prefab is not assigned!");
+        }
+    }
+    public void PlaceTower2()
+    {
+        if (towerPrefab2 != null)
+        {
+            GameObject tower = Instantiate(towerPrefab2, transform.position, Quaternion.identity);//spawns the tower then 
+            tower.transform.SetPositionAndRotation(towerParent.position, transform.rotation);// makes it transfrom the towerparent
+            placing_tower2_mode = false;
+        }
+        else
+        {
+            Debug.LogError("Tower prefab is not assigned!");
+        }
+    }
+    public void PlaceTower3()
+    {
+        if (towerPrefab3 != null)
+        {
+            GameObject tower = Instantiate(towerPrefab3, transform.position, Quaternion.identity);//spawns the tower then 
+            tower.transform.SetPositionAndRotation(towerParent.position, transform.rotation);// makes it transfrom the towerparent
+            placing_tower3_mode = false;
         }
         else
         {

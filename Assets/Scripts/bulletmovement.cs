@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
@@ -6,6 +7,7 @@ public class bulletmovement : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
     private GameObject enemy;
+    [SerializeField] private int damage = 1;
 
     public void SetEnemy(GameObject enemy)
     {
@@ -37,7 +39,7 @@ public class bulletmovement : MonoBehaviour
 
             if (enemy != null)
             {
-                enemy.takedamage(1);
+                enemy.takedamage(damage);
                 Destroy(gameObject);
             }
         }
